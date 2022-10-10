@@ -1,0 +1,21 @@
+(defstruct course code name prereqs)
+
+(defvar a)
+
+(defun quicksort (vec comp)
+  (when (> (length vec) 1)
+    (let ((pivot-i 0)
+          (pivot (aref vec (1- (length vec)))))
+      (dotimes (i (1- (length vec)))
+        (when (funcall comp (aref vec i) pivot)
+          (rotatef (aref vec i)
+                   (aref vec pivot-i))
+          (incf pivot-i)))
+      (rotatef (aref vec (1- (length vec)))
+               (aref vec pivot-i))
+      (quicksort (rtl:slice vec 0 pivot-i) comp)
+      (quicksort (rtl:slice vec (1+ pivot-i)) comp)))
+  vec)
+
+(setf a (make-array 3 :initial-element #((make-course :code "cps305")(make-course :code "cps306")(make-course :code "cps307"))))
+(setf a (quicksort a "<string"))
