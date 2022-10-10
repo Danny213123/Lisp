@@ -19,6 +19,6 @@
 
 ;(setf a (make-array 3 :initial-element #((make-course :code "cps305")(make-course :code "cps306")(make-course :code "cps307"))))
 (setf (aref a 0) (make-course :code "cps305"))
-(setf (aref a 0) (make-course :code "cps305"))
-(setf (aref a 0) (make-course :code "cps305"))
+(setf (aref a 1) (make-course :code "cps305"))
+(setf (aref a 2) (make-course :code "cps305"))
 (setf a (quicksort a #'(lambda (x y) (string< (course-code x) (course-code y)))))
