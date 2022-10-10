@@ -1,6 +1,6 @@
 (defstruct course code name prereqs)
 
-(defvar a (make-array 3 :initial-element nil)
+(defvar a (make-array 3 :initial-element nil))
 
 (defun quicksort (vec comp)
   (when (> (length vec) 1)
