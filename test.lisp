@@ -1,6 +1,6 @@
 (defstruct course code name prereqs)
 
-(defvar a)
+(defvar a (make-array 3 :initial-element nil)
 
 (defun quicksort (vec comp)
   (when (> (length vec) 1)
@@ -17,5 +17,8 @@
       (quicksort (rtl:slice vec (1+ pivot-i)) comp)))
   vec)
 
-(setf a (make-array 3 :initial-element #((make-course :code "cps305")(make-course :code "cps306")(make-course :code "cps307"))))
-(setf a (quicksort a "<string"))
+;(setf a (make-array 3 :initial-element #((make-course :code "cps305")(make-course :code "cps306")(make-course :code "cps307"))))
+(setf (aref a 0) (make-course :code "cps305"))
+(setf (aref a 0) (make-course :code "cps305"))
+(setf (aref a 0) (make-course :code "cps305"))
+(setf a (quicksort a #'(lambda (x y) (string< (course-code x) (course-code y)))))
