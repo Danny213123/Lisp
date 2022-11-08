@@ -57,12 +57,8 @@
 )
 
 (defun interleave (a b)
-    (if (equal (length a) 0)
-        (return-from interleave b)
-    )
-    (if (equal (length b) 0)
-        (return-from interleave a)
-    )
+    (if (equal (length a) 0)(return-from interleave b))
+    (if (equal (length b) 0)(return-from interleave a))
     (return-from interleave (cons (car a) (cons (car b) (interleave (cdr a) (cdr b)))))
 )
 
