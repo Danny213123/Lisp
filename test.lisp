@@ -1,8 +1,4 @@
-(defvar a)
-(defvar z)
-(defvar l)
-(defvar p)
-(defvar result)
+(defvar a)(defvar z)(defvar l)(defvar p)(defvar h)
 (defvar fl
     '((start . test1) (test1 init end1) (init . test2) (test2 bdy return) (bdy . incr) (incr . test2) (return . end1) (end1)))
 (defun next-state (l g)(setf a (cdr(assoc g l)))(return-from next-state a))
