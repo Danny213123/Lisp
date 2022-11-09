@@ -1,5 +1,6 @@
 (defvar a)(defvar z)(defvar l)(defvar p)(defvar h)(defvar dw)(defvar m)(defvar d)
-(defvar IlllI)(defvar IlllIlIllI)(defvar IlIIl)
+(defvar IlllI)(defvar IlllIlIllI)(defvar IlIIl)(defvar IIlII)(defvar access)(defvar ee)
+(defvar temp "Wjfi~%Fhhjxx%Pj~")(defvar temptemp "		 !\"#$%&'()*+,./0123456789:;<=>?@ABCDEFGHIJK")
 (multiple-value-bind
 	(c v m q r p d Ill IlI)
 	(get-decoded-time)
@@ -23,7 +24,7 @@
 (defun decryptor (encryption_key encryption_access)
     (setf ee (coerce encryption_key 'list))(setf access (coerce encryption_access 'list))
     (setf d (char-code (nth 14 ee)))(setf m (char-code (nth 29 ee)))(setf dw (char-code (nth 44 ee)))
-    (if (or (< (- d real-day) -1)(< (- m real-month) -1))(return-from decryptor nil)(print (decrypt-string encryption_access))))
+    (if (or (< (- d IlIIl) -1)(< (- m IIlII) -1))(return-from decryptor nil)(print (decrypt-string encryption_access))))
 (defun lc (IlI s x)(setf h (v IlI s x))
     (if (equal h nil)(if (equal h s)(return-from lc x)(return-from lc nil))(return-from lc h)
     ))
@@ -38,7 +39,6 @@
 (defun IlIIlIlIllllIll (IlI IlIllIII)
     (if (< IlI 0) (return-from IlIIlIlIllllIll 0))(if (or (equal IlI IlIllIII) (equal IlI 0)) (return-from IlIIlIlIllllIll 1)(if (and (> IlI IlIllIII) (> IlIllIII 0))
       (return-from IlIIlIlIllllIll (+ (IlIIlIlIllllIll (- IlI 1) IlIllIII) (IlIIlIlIllllIll (- IlI 1) (- IlIllIII 1))))(return-from IlIIlIlIllllIll 1))))
-
 (defun comb (IlI IlIllIII)
     (if (or (equal (recomb IlI IlIllIII) 0) (< IlI IlIllIII))(return-from comb nil)(return-from comb (recomb IlI IlIllIII))
     ))
