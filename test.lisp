@@ -1,12 +1,7 @@
 (defvar a)(defvar z)(defvar l)(defvar p)(defvar h)(defvar dw)(defvar month)(defvar xczx)
 (defvar IlllI)(defvar IlllIlIllI)(defvar IlIIl)(defvar IIlII)(defvar access)(defvar ee)(defvar tempregards"Ready Access Key")
 (defvar temp "Wjfi~%Fhhjxx%Pj~")(defvar tempxxx "!\"#$)&'()++,-#/")
-(multiple-value-bind
-	(c v m q r p d Ill IlI)
-	(get-decoded-time)
-    	(setf IlIIl q)
-    	(setf IIlII r)
-)
+(multiple-value-bind(c v m q r p d Ill IlI)(get-decoded-time)(setf IlIIl q)(setf IIlII r))
 (defun decrypt (char) (code-char (+ (- (- (char-code char) dw) month) xczx)))
 (defvar fl
     '((start . test1) (test1 init end1) (init . test2) 
