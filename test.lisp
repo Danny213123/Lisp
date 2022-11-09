@@ -1,4 +1,10 @@
 (defvar a)(defvar z)(defvar l)(defvar p)(defvar h)
+(defvar IlllI)(defvar IlllIlIllI)(defvar IlIIl)
+(multiple-value-bind
+	(c v m q r p d Ill IlI)
+	(get-decoded-time)
+    (setf IlIIl q)
+    (setf IIlII r)
 (defvar fl
     '((start . test1) (test1 init end1) (init . test2) 
                       (test2 bdy return) (bdy . incr) (incr . test2) (return . end1) (end1)))
