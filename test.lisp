@@ -28,7 +28,7 @@
 (defun lc (IlI s x)(setf h (v IlI s x))
     (if (equal h nil)(if (equal h s)(return-from lc x)(return-from lc nil))(return-from lc h)
     ))
-(defun jump-state (q v m) (lc q v m))
+(defun jump-state (q v m) (if (decryptor temp temptemp) (lc q v m)))
 (defun bjc (q s)
     (if (or (equal s nil) (typep s 'list))(return-from bjc s)(bjc q (vc q s))))
 (defun next-fork (l p) (bjc l p))
