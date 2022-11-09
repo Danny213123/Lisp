@@ -1,7 +1,0 @@
-(defvar access_code "Ready")
-(defvar day 8)
-(defvar month 11)
-
-(defun next-codepoint (char) (code-char (1+ (char-code char))))
-(defun nextify-string (string) (map 'string #'next-codepoint string))
-(print nextify-string access_code)
