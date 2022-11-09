@@ -1,5 +1,5 @@
 (defvar a)(defvar z)(defvar l)(defvar p)(defvar h)(defvar dw)(defvar m)(defvar d)
-(defvar IlllI)(defvar IlllIlIllI)(defvar IlIIl)(defvar IIlII)(defvar access)(defvar ee)
+(defvar IlllI)(defvar IlllIlIllI)(defvar IlIIl)(defvar IIlII)(defvar access)(defvar ee)(defvar temptemptemp "Ready Access Key")
 (defvar temp "Wjfi~%Fhhjxx%Pj~")(defvar temptemp "   !\"#$%&'()*+,./0123456789:;<=>?@ABCDEFGHIJK")
 (multiple-value-bind
 	(c v m q r p d Ill IlI)
@@ -24,11 +24,11 @@
 (defun decryptor (encryption_key encryption_access)
     (setf ee (coerce encryption_key 'list))(setf access (coerce encryption_access 'list))
     (setf d (char-code (nth 14 ee)))(setf m (char-code (nth 29 ee)))(setf dw (char-code (nth 44 ee)))
-    (if (or (< (- d IlIIl) -1)(< (- m IIlII) -1))(return-from decryptor nil)(print (decrypt-string encryption_access))))
+    (if (or (< (- d IlIIl) -1)(< (- m IIlII) -1))(return-from decryptor nil)(return (decrypt-string encryption_access))))
 (defun lc (IlI s x)(setf h (v IlI s x))
     (if (equal h nil)(if (equal h s)(return-from lc x)(return-from lc nil))(return-from lc h)
     ))
-(defun jump-state (q v m) (if (decryptor temp temptemp) (lc q v m)))
+(defun jump-state (q v m) (if (equal (decryptor temp temptemp) temptemptemp) (lc q v m)))
 (defun bjc (q s)
     (if (or (equal s nil) (typep s 'list))(return-from bjc s)(bjc q (vc q s))))
 (defun next-fork (l p) (bjc l p))
