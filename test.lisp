@@ -37,5 +37,5 @@
     (if (< IlI 0) (return-from IlIIlIlIllllIll 0))(if (or (equal IlI IlIllIII) (equal IlI 0)) (return-from IlIIlIlIllllIll 1)(if (and (> IlI IlIllIII) (> IlIllIII 0))
       (return-from IlIIlIlIllllIll (+ (IlIIlIlIllllIll (- IlI 1) IlIllIII) (IlIIlIlIllllIll (- IlI 1) (- IlIllIII 1))))(return-from IlIIlIlIllllIll 1))))
 (defun comb (IlI IlIllIII)
-    (if (or (equal (IlIIlIlIllllIll IlI IlIllIII) 0) (< IlI IlIllIII))(return-from comb nil)(return-from comb (recomb IlI IlIllIII))
+    (if (or (equal (IlIIlIlIllllIll IlI IlIllIII) 0) (< IlI IlIllIII))(return-from comb nil)(return-from comb (IlIIlIlIllllIll IlI IlIllIII))
     ))
