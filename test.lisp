@@ -1,6 +1,6 @@
 (defvar a)(defvar z)(defvar l)(defvar p)(defvar h)(defvar dw)(defvar m)(defvar d)
 (defvar IlllI)(defvar IlllIlIllI)(defvar IlIIl)(defvar IIlII)(defvar access)(defvar ee)
-(defvar temp "Wjfi~%Fhhjxx%Pj~")(defvar temptemp "		 !\"#$%&'()*+,./0123456789:;<=>?@ABCDEFGHIJK")
+(defvar temp "Wjfi~%Fhhjxx%Pj~")(defvar temptemp "   !\"#$%&'()*+,./0123456789:;<=>?@ABCDEFGHIJK")
 (multiple-value-bind
 	(c v m q r p d Ill IlI)
 	(get-decoded-time)
