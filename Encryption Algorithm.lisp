@@ -19,7 +19,7 @@
 )
 
 (defun decrypt (char) 
-    (code-char (+ (- (- (char-code char) dw) m) d))
+    (code-char (+ (- (- (char-code char) dw) month2) day2))
 )
 
 ; Turn string into ASCII code
@@ -34,12 +34,12 @@
 
 (defvar b '(day month year))
 (defvar i 0)
-(loop for h from 1 to 75
-    do (if (equal h 15)
+(loop for h from 1 to 15
+    do (if (equal h 5)
            (vector-push-extend (code-char (+ day 32)) a)
-           (if (equal h 30)
+           (if (equal h 10)
                (vector-push-extend (code-char (+ month 32)) a)
-               (if (equal h 45)
+               (if (equal h 14)
                    (vector-push-extend (code-char (+ day-of-week 32)) a)
                    (vector-push-extend (code-char (+ h 32)) a)
                )
@@ -49,10 +49,10 @@
 
 (defun decryptor (encryption_key encryption_access)
     (setf ee (coerce encryption_key 'list))(setf access (coerce encryption_access 'list))
-    (setf d (char-code (code-char (- (char-code (nth 14 ee)) 32))))
-    (setf m (char-code (code-char (- (char-code (nth 29 ee)) 32))))
-    (setf dw (char-code (code-char (- (char-code (nth 44 ee)) 32))))
-    (if (or (< (- d real-day) -1)(< (- m real-month) -1))
+    (setf day2 (char-code (code-char (- (char-code (nth 4 ee)) 32))))
+    (setf month2 (char-code (code-char (- (char-code (nth 9 ee)) 32))))
+    (setf dw (char-code (code-char (- (char-code (nth 13 ee)) 32))))
+    (if (or (< (- day2 real-day) -1)(< (- month2 real-month) -1))
         (return-from decryptor nil)
         (print (decrypt-string encryption_access))
     )
