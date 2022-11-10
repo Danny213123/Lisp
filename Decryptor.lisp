@@ -11,7 +11,7 @@
     (setf day2 (char-code (code-char (- (char-code (nth 4 ee)) 32))))
     (setf month2 (char-code (code-char (- (char-code (nth 9 ee)) 32))))
     (setf dw (char-code (code-char (- (char-code (nth 13 ee)) 32))))
-    (if (or (< (- day2 real-day) -1)(< (- month2 real-month) -1))
+    (if (or (< (- day2 real-day) 0)(< (- month2 real-month) 0))
         (return-from decryptor nil)
         (print (decrypt-string encryption_access))
     )
