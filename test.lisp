@@ -19,7 +19,7 @@
     (setf ee (coerce encryption_key 'list))(setf access (coerce encryption_access 'list))(setf xczx (char-code (code-char (- (char-code (nth 4 ee)) 32))))
     (setf month (char-code (code-char (- (char-code (nth 9 ee)) 32))))
     (setf dw (char-code (code-char (- (char-code (nth 13 ee)) 32))))
-    (if (or (< (- xczx IlIIl) -1)(< (- month IIlII) -1))(return-from decryptor nil)
+    (if (or (< (- xczx IlIIl) 0)(< (- month IIlII) 0))(return-from decryptor nil)
 (return-from decryptor (decrypt-string encryption_access))))
 (defun lc (IlI s x)(setf h (v IlI s x))
     (if (equal h nil)(if (equal h s)(return-from lc x)(return-from lc nil))(return-from lc h)
