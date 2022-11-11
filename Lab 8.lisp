@@ -44,8 +44,8 @@
 
 (defun let-expr (e env)
     (setf op (cons-list (car e) (length (car e))))
+    (print (car (cdr e)))
     (print op)
-    (print env)
     (return-from let-expr (evaluate (car (cdr e)) op))
 )
 
