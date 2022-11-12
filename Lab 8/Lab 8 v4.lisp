@@ -1,0 +1,133 @@
+(defvar temp_list ())
+(defvar temp_value)
+
+(defun printem (&rest args)
+  (format t "~{~a~^ ~}" args))
+
+(defun evaluate (e env)
+  (let ((res (valid-args? e)))
+    (if (car res)
+        (if (atom e)
+            (cond
+              ((constant? e) e)
+              ((symbol? e) (lookup e env))
+              ((or (procedure? e) (numberp e)) e)
+              (t (wrong "Could not evaluate expression: ~S~%" e)))
+            (case (car e)
+              ((progn) (eprogn (cdr e) env))
+              ((setf) (update! (cadr e) env (evaluate (caddr e) env)))
+              ((if) (if-expr (cdr e) env))
+              ((let) (let-expr (cdr e) env))
+              (t (invoke (evaluate (car e) env) (evlist (cdr e) env)))))
+        (format t "Invalid number of args: expected ~d, got ~d in ~S~%" (caddr res) (cadr res) e))))
+
+(defun if-expr (e env)
+    (return-from if-expr (if (evaluate (car e) env) (evaluate (cadr e) env) (evaluate (caddr e) env)))
+)
+
+(defun cons-list (ls)
+    (if (typep (car (cdr (car ls))) 'cons)
+        (setf temp_value (car (evlist (cdr (car ls)) temp_list)))
+    )
+    (if (typep (car (cdr (car ls))) 'cons)
+        (return-from cons-list (cons (car (car ls)) temp_value))
+        (return-from cons-list (cons (car (car ls)) (car (cdr (car ls)))))
+    )
+)
+
+(defun let-expr (e env)
+    (if (typep env 'cons)
+        (push (car env) temp_list)
+    )
+    (dolist (x (car e))
+        (push (cons-list (list x)) temp_list)
+    )
+    (if (car (valid-args? e))
+        (evlist (cdr e) temp_list)
+    )
+
+    (if (> (length (cdr e)) 1) 
+        (return-from let-expr (car (evlist (cdr (cdr e)) temp_list)))
+        (return-from let-expr (evaluate (car (cdr e)) temp_list))    
+    )
+)
+
+(defun lookup (e env)
+  (let ((v (assoc e env)))
+    (if v (cdr v)
+        (wrong "Unbound-variable: ~S~%" e))))
+
+(defun update! (var env value)
+    ;(print var)(print env)(print value)
+  (let ((kv (assoc var env)))
+    (setf (cdr kv) value)
+       )
+)
+
+(defun eprogn (el env)
+  (let ((result (evaluate (car el) env)))
+    (dolist (e (cdr el) result)
+      (setf result (evaluate e env)))))
+
+(defun procedure? (fn)
+  (or (eql fn '+)
+      (eql fn '-)
+      (eql fn '*)
+      (eql fn '/)))
+
+(defun wrong (m &optional v)
+  (format t m v))
+
+(defun check-arg-types (fn args)
+  (and (procedure? fn)
+       (numberp (first args))
+       (numberp (second args))))
+
+(defun invoke (fn args)
+  (if (procedure? fn)
+      (apply fn args)
+      (wrong "Could not evaluate function: ~S" fn)))
+
+(defun evlist (lis env)
+  (when lis
+    (let ((a (evaluate (car lis) env)))
+      (cons a (evlist (cdr lis) env)))))
+
+(defun constant? (s)
+  (or (eql s 'nil)
+      (eql s 't)
+      (stringp s)))
+
+(defun symbol? (s)
+  (and (symbolp s) (not (procedure? s)) (not (constant? s))))
+
+(defun valid-args-num? (lst num)
+  (let* ((len (length lst)) (res (= len num)))
+    (list res len num)))
+
+(defun valid-args? (lst)
+  (if (eql (type-of lst) 'cons)
+      (case (car lst)
+        ((setf) (valid-args-num? lst 3))
+        ((if) (valid-args-num? lst 4))
+        ((let)
+         (progn
+           (loop for item in (cadr lst) do
+             (let ((res (valid-args-num? item 2)))
+               (if (not (car res))
+                   (return-from valid-args? (list nil (cadr res) 2)))))
+           '(t 2 2)))
+        (t (let ((len (length lst)))
+             (list t len len))))
+      '(t 0 0)))
+
+
+
+;(print(evaluate '(if x y x) (list (cons 'x nil) (cons 'y nil) (cons 'z 9))))
+;(print (evaluate '(let ((x 1)) x) nil))
+;(print (evaluate '(let ((x 4)(y 1)(z 9)) (+ x y z (+ z x))) nil))
+;(print (evaluate '(let ((a 2)) (let ((B (+ A 4))) (+ A B))) nil))
+;(print (evaluate '(if x (setf x (+ x z)) y) (list (cons 'x 1)(cons 'y 2)(cons 'z 3))))
+;(print (evaluate '(let ((x 1)(y 2)) (if x (setf x (+ x z)) y) (+ x z)) (list (cons 'z 3))))
+;(print (evlist '((if x (setf x (+ x z)) y) (+ x z)) (list (cons 'x 1) (cons 'y 2) (cons 'z 3))))
+;(print (evaluate '(let ((x (* y 2))) (setf y (+ x 2)) (+ x y)) (list (cons 'y 3))))
