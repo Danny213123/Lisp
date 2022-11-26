@@ -1,8 +1,6 @@
 (defvar current)(defvar depth 0)(defvar zxczzz)(defvar true nil)(defvar a)(defvar ad)
 (defvar fl '((1 . 2)(2 4 3)(4)(3 . 1)(5 . 2)(6 . 5)))
 ;(defvar ff '((start . test1) (test1 init end1) (init . test2) (test2 bdy return) (bdy . incr) (incr . test2) (return . end1) (end1)))
-
-(defvar index 0)
 (setf visited '())
 
 (defun next-state (std key)
@@ -15,10 +13,7 @@
     (if (equal (next-state fl zxczzz) nil) (return-from test nil))
     (setf current (next-state fl cur))
     (if (equal (member current visited) nil)
-        (progn
-            (setf visited (cons current visited))
-            (setf index (+ index 1))
-        )
+        (setf visited (cons current visited))
         (return-from test nil)
     )
     (if (equal current zxczzz)
